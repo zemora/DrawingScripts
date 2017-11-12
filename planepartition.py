@@ -33,7 +33,7 @@ RIGHT = np.array([(0, 0),
 
 TOPFACE = plt.Polygon(TOP, fc=TOP_COLOR, ec='k', lw=1)
 LEFTFACE = plt.Polygon(LEFT, fc=LEFT_COLOR, ec='k', lw=1)
-TOPFACE = plt.Polygon(RIGHT, fc=RIGHT_COLOR, ec='k', lw=1)
+RIGHTFACE = plt.Polygon(RIGHT, fc=RIGHT_COLOR, ec='k', lw=1)
 
 
 class PlanePartition(object):
@@ -131,3 +131,56 @@ class PlanePartition(object):
         anim = FuncAnimation(fig, animate, init_func=init, interval=20,
                              frames=frames, blit=True)
         anim.save('nonintersecting_paths.gif', writer='imagemagick', fps=60, dpi=100)
+        
+        
+    def draw_planepartition(self):
+        fig = plt.figure(figsize=(4, 4), dpi=100)
+        ax = fig.add_axes([0, 0, 1, 1], aspect=1)
+        ax.axis([-self.a, self.b, -self.b - 1, self.c + 2])
+        ax.axis("off")
+        
+        # floor
+        floor = ax.add_patch(TOPFACE)
+        for i in range(self.a):
+            for j in range(self.b):
+                shift = i * X + j * Y
+                floor.set_xy(TOP + (shift.real, shift.imag))
+                
+        # left wall
+        left_wall = ax.add_patch(RIGHTFACE)
+        for i in range(self.a):
+            for j in range(self.c):
+                shift = i * X + j * Z
+                left_wall.set_xy(RIGHT + (shift.real, shift.imag))
+                
+        # right wall
+        right_wall = ax.add_patch(LEFTFACE)
+        for i in range(self.b):
+            for j in range(self.c):
+                shift = i * Y + j * Z
+                right_wall.set_xy(LEFT + (shift.real, shift.imag))
+                
+        # cubes
+        for i, x in enumerate(self.heightmap):
+            for j, val in enumerate(x):
+                if val > 0:
+                    for k in range(1, val + 1):
+                        shift = i * X + j * Y + k * Z
+                        floor.set_xy(TOP + (shift.real, shift.imag))
+                        left_wall.set_xy(RIGHT + (shift.real, shift.imag))
+                        right_wall.set_xy(LEFT + (shift.real, shift.imag))
+           
+        fig.savefig("planepartion.png")
+        
+        
+pp = PlanePartition([[6, 5, 5, 4, 3, 2],
+                     [5, 4, 3, 3],
+                     [4, 3, 2],
+                     [3, 2, 1],
+                     [2, 1],
+                     [1]],
+                    6, 6, 6)
+
+pp.draw_paths()
+pp.nonintersect_path_system()
+pp.draw_planepartition()
