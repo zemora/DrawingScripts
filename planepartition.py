@@ -28,3 +28,7 @@ RIGHT = np.array([(0, 0),
                  (np.sqrt(3) * 0.5, -0.5),
                  (0, -1),
                  (0, 0)])
+
+TOPFACE = plt.Polygon(TOP, fc=TOP_COLOR, ec='k', lw=1)
+LEFTFACE = plt.Polygon(LEFT, fc=LEFT_COLOR, ec='k', lw=1)
+TOPFACE = plt.Polygon(RIGHT, fc=RIGHT_COLOR, ec='k', lw=1)
