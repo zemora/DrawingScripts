@@ -70,11 +70,11 @@ class PlanePartition(object):
         for i in range(self.b + 1):
             ax.plot([i, i], [0, self.b], 'k:')
         
-        # draw the paths and put texts over them.
+        # draw the paths
         for path, color, arr in zip(self.paths, self.colors, self.heightmap):
             xs, ys = zip(*path)
             ax.plot(xs, ys, lw=2, color=color)
-            
+            # add labels
             for i, x in enumerate(arr):
                 if x > 0:
                     ax.text(i+0.4, x+0.1, str(x))
@@ -83,4 +83,11 @@ class PlanePartition(object):
         ax.text(self.b - 0.5, -0.5, "(b, 0)")
         fig.savefig("gauss_path.png")
         
+    
+    def nonintersect_path_system(self):
+        fig = plt.figure(figsize=(6, 6), dpi=100)
+        ax = fig.add_axes([0, 0, 1, 1], aspect=1)
+        ax.axis([-1, self.b + self.a + 1, -1, self.c + self.a + 1])
+        ax.axis("off")
+      
         
