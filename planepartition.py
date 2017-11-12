@@ -90,6 +90,8 @@ class PlanePartition(object):
         ax.axis([-1, self.b + self.a + 1, -1, self.c + self.a + 1])
         ax.axis("off")
         
+        frames = 61
+        
         # dotted lines
         dots = []
         for i in range(self.c + self.a + 1):
@@ -103,5 +105,29 @@ class PlanePartition(object):
         for i in range(self.a):
             lines.extend(ax.plot([], [], '-', lw=2, color=self.colors[i]))
 
-      
+        # the two trajectories
+        trajects = []
+        trajects.extend(ax.plot([0, self.a], [self.c, self.a + self.c], 'k--', lw=1))
+        trajects.extend(ax.plot([self.b, self.b + self.a], [0, self.a], 'k--', lw=1))
         
+        def init():
+            ax.text(-0.8, self.c + 0.2, "(0, c)")
+            ax.text(self.b - 0.5, -0.5, "(b, 0)")
+            for l in lines:
+                l.set_data([], [])
+            return dots + lines + trajects
+        
+        def animate(t):
+            t = t / (frames - 1.0)
+            for i, path in enumerate(self.paths):
+                xs, ys = zip(*path)
+                xx = [z + max(0, t-1) * (len(self.array) - i) for z in xs]
+                yy = [z + max(0, t-1) * (len(self.array) - i) for z in ys]
+                lines[i].set_data(xx, yy)
+            
+            fig.canvas.draw()
+            return lines
+
+        anim = FuncAnimation(fig, animate, init_func=init, interval=20,
+                             frames=frames, blit=True)
+        anim.save('nonintersecting_paths.gif', writer='imagemagick', fps=60, dpi=100)
