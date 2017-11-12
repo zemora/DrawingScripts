@@ -77,7 +77,7 @@ class PlanePartition(object):
             # add labels
             for i, x in enumerate(arr):
                 if x > 0:
-                    ax.text(i+0.4, x+0.1, str(x))
+                    ax.text(i + 0.4, x + 0.1, str(x))
         
         ax.text(-0.8, self.c + 0.2, "(0, c)")
         ax.text(self.b - 0.5, -0.5, "(b, 0)")
@@ -89,5 +89,19 @@ class PlanePartition(object):
         ax = fig.add_axes([0, 0, 1, 1], aspect=1)
         ax.axis([-1, self.b + self.a + 1, -1, self.c + self.a + 1])
         ax.axis("off")
+        
+        # dotted lines
+        dots = []
+        for i in range(self.c + self.a + 1):
+            dots.extend(ax.plot([0, self.b + self.a], [i, i], 'k:'))
+
+        for i in range(self.b + self.a + 1):
+            dots.extend(ax.plot([i, i], [0, self.b + self.a], 'k:'))
+        
+        # the paths
+        lines = []
+        for i in range(self.a):
+            lines.extend(ax.plot([], [], '-', lw=2, color=self.colors[i]))
+
       
         
