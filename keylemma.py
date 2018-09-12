@@ -99,7 +99,7 @@ place(t, 0, L+0.15)
 t = texinsert(r"$t=0$")
 t.scale(fontscale)
 t.translate(-t.width, -t.height)
-place(t, (L+0.25)*v1)
+place(t, (L+0.2)*v1)
 
 t = texinsert(r"$st$")
 t.scale(fontscale)
@@ -107,20 +107,21 @@ place(t, L*sc*cos(pi/6.5), L*sc*sin(pi/6.5))
 
 # ---- angle arcs -----
 
+scalelinewidth(2)
 newpath()
-setdash([2, 2], 0)
-arc(0, 0, 0.4, 2*pi/3, pi)
+setdash([6, 4], 0)
+arc(0, 0, 0.5, 2*pi/3, pi)
 stroke()
 
 t = texinsert(r"$\frac{\pi}{m}$")
-t.scale(fontscale/1.5)
+t.scale(fontscale)
 t.translate(-t.width/2, t.height)
-place(t, 0.6 * (v2+v3) / 2)
+place(t, 0.8 * (v2+v3) / 2)
 
 t = texinsert(r"$\frac{\pi}{m}$")
-t.scale(fontscale/1.5)
+t.scale(fontscale)
 t.translate(-t.width/2, t.height)
-place(t, 0.6 * (v3+(-1, 0)) / 2)
+place(t, 0.8 * (v3+(-1, 0)) / 2)
 
 # --------------------------------
 finish()
