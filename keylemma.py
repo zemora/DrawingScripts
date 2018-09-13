@@ -91,10 +91,10 @@ t.scale(fontscale)
 t.translate(-t.width, -t.height)
 place(t, L*(sc-0.1)*((v1+Vector(0, 1))/2))
 
-t = texinsert(r"$s=0$")
+t = texinsert("$s=0$")
 t.scale(fontscale)
 t.translate(-t.width, -t.height)
-place(t, 0, L+0.15)
+place(t, -0.1, L+0.15)
 
 t = texinsert(r"$t=0$")
 t.scale(fontscale)
