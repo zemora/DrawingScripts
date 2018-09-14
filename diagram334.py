@@ -8,7 +8,7 @@ translate(0, -0.2)
 R = 1.8
 r = 0.15
 
-scalelinewidth(5)
+scalelinewidth(2.5)
 
 A = Vector(0, R)
 B = Vector(R*cos(pi*7/6), R*sin(pi*7/6))
