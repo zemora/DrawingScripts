@@ -1,10 +1,9 @@
 from piscript.PiModule import *
 
 n = 10
-size = 300
-init(size, size)
+init(300, 300)
 center()
-scale(size / (2.0 * n) - 0.3)
+scale(14)
 
 
 def rectangle(x1, y1, x2, y2, gray):
