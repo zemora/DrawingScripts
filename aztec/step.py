@@ -34,7 +34,7 @@ def render(az, size, filename, chess_board=False):
         else:
             rectangle(i+margin, j+margin, i+1-margin, j+1-margin, (1, 1, 1), (0, 0, 0))
         
-    margin = 0.1
+    margin = 0.2
     for i, j in az.cells:
         if (az.is_black(i, j) and az.tile[(i, j)] is not None):
             if az.tile[(i, j)] == 'n':
