@@ -20,11 +20,9 @@ def fork(p, n, L):
         lineto(q)
         stroke()
 
-
 def fork_all(pts, L):
     for p, n in zip(pts, [E, N, W, S]):
         fork(p, n, L)
-
 
 def dots(pts, rad):
     for p in pts:
@@ -32,7 +30,6 @@ def dots(pts, rad):
         circle(p, rad)
         fill(1, 0, 0)
         stroke()
-
 
 def line(p, q, color=None):
     newpath()
@@ -55,7 +52,6 @@ def dashline(p, q, color=None):
         stroke()
     grestore()
 
-
 def path(plist, color=None):
     newpath()
     moveto(plist[0])
@@ -68,13 +64,11 @@ def path(plist, color=None):
     else:
         stroke()
 
-
 def text(string, pos, sc):
     newpath()
     t = texinsert(string)
     t.scale(sc)
     place(t, pos)
-
 
 def spidermove():
     init("spidermove.eps", 600, 250)
@@ -151,7 +145,6 @@ def spidermove():
     dots(lpoints + rpoints + out, 0.07)
     finish()
 
-
 def case1():
     init("case1.eps", 800, 250)
     center()
@@ -178,7 +171,6 @@ def case1():
     line(lpoints[2], lpoints[3], color)
     line(mpoints[1], mpoints[2], color)
     line(mpoints[3], mpoints[0], color)
-
 
     setarrowdims(0.06, 0.2)
     arrow_size = Vector(0.3, 0)
@@ -287,7 +279,6 @@ def case1():
     dots(lpoints + mpoints + rpoints + out1 + out2, 0.07)
     finish()
 
-
 def case2():
     init("case2.eps", 600, 250)
     center()
@@ -372,7 +363,6 @@ def case2():
     dots(lpoints + rpoints + out, 0.07)
     finish()
 
-
 def case3():
     init("case3.eps", 800, 250)
     center()
@@ -391,7 +381,6 @@ def case3():
     fork_all(out, 0.3)
     fork_all(mpoints, 0.3)
     fork_all(rpoints, 0.3)
-
 
     color = (0, 0, 1)
     for p, q in zip(out, lpoints):
