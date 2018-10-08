@@ -60,8 +60,8 @@ def fork_all(pts, L):
     for p, n in zip(pts, [E, N, W, S]):
         fork(p, n, L)
 
-def frame1():
-    init("frame1.eps", 640, 200)
+def delete():
+    init("delete.eps", 640, 200)
     center()
     scale(50)
     #scalelinewidth(1.5)
@@ -121,4 +121,4 @@ def frame1():
     finish()
 
 
-frame1()
+delete()
