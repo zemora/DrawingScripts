@@ -60,11 +60,12 @@ def fork_all(pts, L):
     for p, n in zip(pts, [E, N, W, S]):
         fork(p, n, L)
 
-def frame1():
-    init("frame1.eps", 400, 400)
+def create():
+    init("create.eps", 640, 200)
     center()
-    scale(100)
-    scalelinewidth(1.5)
+    scale(50)
+    gsave()
+    translate(-5, 0)
     dashline(N, W)
     dashline(S, E)
     dashline(E, N)
@@ -72,15 +73,10 @@ def frame1():
     fork_all([E, N, W, S], 0.3)
 
     dots([N,E,S,W], 0.07)
-    
-    finish()
+    grestore()
 
-
-def frame2():
-    init("frame2.eps", 400, 400)
-    center()
-    scale(100)
-    scalelinewidth(1.5)
+    gsave()
+    translate(-0.5, 0)
     L = 0.4
     out = [p + L * q for p, q in zip(Dirs, Dirs)]
     inner = [p - L * q for  p, q in zip(Dirs, Dirs)]
@@ -98,16 +94,10 @@ def frame2():
 
     dots(out + inner + Dirs, 0.07)
     
-    finish()
-
-
-def frame3():
-    init("frame3.eps", 400, 400)
-    center()
-    scale(100)
-    scalelinewidth(1.5)
-    L = 0.4
-    out = [p + L * q for p, q in zip(Dirs, Dirs)]
+    grestore()
+    gsave()
+    scale(0.5)
+    translate(8, 2)
     inner = Dirs
     line(inner[1], inner[2], blue)
     line(inner[3], inner[0], blue)
@@ -120,9 +110,33 @@ def frame3():
 
     dots(out + inner, 0.07)
     
+    grestore()
+
+    gsave()
+    scale(0.5)
+    translate(8, -2)
+    inner = Dirs
+    dashline(inner[1], inner[2])
+    dashline(inner[3], inner[0])
+    line(inner[0], inner[1], blue)
+    line(inner[2], inner[3], blue)
+    fork_all(out, 0.3)
+
+    for p, q in zip(out, Dirs):
+        dashline(p, q)
+
+    dots(out + inner, 0.07)
+    
+    grestore()
+
+    setarrowdims(0.04, 0.2)
+    newpath()
+    arrow((-3.5, 0), (-2.5, 0))
+    stroke()
+
+    newpath()
+    arrow((1.5, 0), (2.5, 0))
+    stroke()
     finish()
 
-
-frame1()
-frame2()
-frame3()
+create()
