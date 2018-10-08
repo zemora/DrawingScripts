@@ -61,26 +61,23 @@ def fork_all(pts, L):
         fork(p, n, L)
 
 def frame1():
-    init("frame1.eps", 400, 400)
+    init("frame1.eps", 640, 200)
     center()
-    scale(100)
-    scalelinewidth(1.5)
+    scale(50)
+    #scalelinewidth(1.5)
+    gsave()
+    translate(-5, 0)
+    
     line(N, W, color=blue)
     line(S, E, color=blue)
     dashline(E, N)
     dashline(S, W)
     fork_all([E, N, W, S], 0.3)
-
     dots([N,E,S,W], 0.07)
-    
-    finish()
+    grestore()
 
-
-def frame2():
-    init("frame2.eps", 400, 400)
-    center()
-    scale(100)
-    scalelinewidth(1.5)
+    gsave()
+    translate(-0.5, 0)
     L = 0.4
     out = [p + L * q for p, q in zip(Dirs, Dirs)]
     inner = [p - L * q for  p, q in zip(Dirs, Dirs)]
@@ -97,17 +94,9 @@ def frame2():
         line(p, q, blue)
 
     dots(out + inner + Dirs, 0.07)
-    
-    finish()
-
-
-def frame3():
-    init("frame3.eps", 400, 400)
-    center()
-    scale(100)
-    scalelinewidth(1.5)
-    L = 0.4
-    out = [p + L * q for p, q in zip(Dirs, Dirs)]
+    grestore()
+    gsave()
+    translate(4.5, 0)
     inner = Dirs
     dashline(inner[1], inner[2])
     dashline(inner[3], inner[0])
@@ -119,10 +108,17 @@ def frame3():
         line(p, q, blue)
 
     dots(out + inner, 0.07)
-    
+    grestore()
+
+    setarrowdims(0.04, 0.2)
+    newpath()
+    arrow((-3.5, 0), (-2.5, 0))
+    stroke()
+
+    newpath()
+    arrow((1.5, 0), (2.5, 0))
+    stroke()
     finish()
 
 
 frame1()
-frame2()
-frame3()
