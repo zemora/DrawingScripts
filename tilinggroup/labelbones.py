@@ -3,10 +3,10 @@ from math import *
 
 
 SQRT3 = 3**0.5
-FC = 1
-va = Vector(cos(pi/12*5), sin(pi/12*5)) * 0.45
+FC = 1.5
+va = Vector(cos(pi/12*5), sin(pi/12*5)) * 0.55
 vb = Vector(1, 0) * 0.4
-vc = Vector(cos(pi/12*8), sin(pi/12*8)) * 0.6
+vc = Vector(cos(pi/12*8), sin(pi/12*8)) * 0.65
 
 def hexagon(r,g,b):
     newpath()
@@ -21,17 +21,17 @@ def hexagon(r,g,b):
 
     t = texinsert("$a$")
     t.scale(FC)
-    #t.translate(t.width/2, 0)
+    t.translate(t.width/2, 0)
     place(t, va)
 
     t = texinsert("$a$")
     t.scale(FC)
-    t.translate(-t.width, 0)
-    place(t, -va*1.4)
+    t.translate(-t.width*2, 0)
+    place(t, -va*1.3)
 
     t = texinsert("$b$")
     t.scale(FC)
-    t.translate(t.width/2, -t.height/2)
+    t.translate(t.width*2, -t.height/2)
     place(t, vb)
 
     t = texinsert("$b$")
@@ -41,20 +41,20 @@ def hexagon(r,g,b):
 
     t = texinsert("$c$")
     t.scale(FC)
-    t.translate(-t.width/2, -t.height/2)
+    t.translate(-t.width, -t.height/2)
     place(t, vc)
 
     t = texinsert("$c$")
     t.scale(FC)
-    t.translate(-t.width/2, -t.height/2)
-    place(t, -vc)
+    t.translate(-t.width*1.3, -t.height/2)
+    place(t, -vc*1.1)
 
 
 
 def bone1():
-    init("bone1.eps", 150, 100)
+    init("bone1.eps", 300, 200)
     center()
-    scale(25)
+    scale(50)
     for v in [(0, 0), (-SQRT3, 0), (SQRT3, 0)]:
         gsave()
         translate(v)
@@ -64,9 +64,9 @@ def bone1():
     finish()
 
 def bone2():
-    init("bone2.eps", 150, 150)
+    init("bone2.eps", 300, 300)
     center()
-    scale(25)
+    scale(50)
     for v in [(0, 0), (SQRT3/2, 1.5), (-SQRT3/2, -1.5)]:
         gsave()
         translate(v)
@@ -76,9 +76,9 @@ def bone2():
     finish()
 
 def bone3():
-    init("bone3.eps", 150, 150)
+    init("bone3.eps", 300, 300)
     center()
-    scale(25)
+    scale(50)
     for v in [(0, 0), (SQRT3/2, -1.5), (-SQRT3/2, 1.5)]:
         gsave()
         translate(v)
