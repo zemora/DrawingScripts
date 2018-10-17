@@ -72,14 +72,20 @@ def main():
     newpath()
     t = texinsert("$a$")
     t.scale(FC)
-    t.translate(1.6*t.width, -t.height)
+    t.translate(1.6*t.width, -1.2*t.height)
     place(t, 0.25, -SQRT3/2)
 
     newpath()
     t = texinsert("$a$")
     t.scale(FC)
-    t.translate(0.4*t.width, 2*t.height)
+    t.translate(0.4*t.width, 2.2*t.height)
     place(t, 0.25, -SQRT3/2)
+
+    newpath()
+    circle(0, -1, 0.06)
+    fill(1, 0, 0)
+    stroke()
+    
     finish()
 
 
