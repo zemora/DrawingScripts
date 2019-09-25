@@ -62,12 +62,12 @@ def fork_all(pts, L):
 
 
 def slide():
-    init("slide.eps", 640, 200)
+    init("slide.eps", 600, 200)
     center()
     scale(50)
     gsave()
-    translate(-5, 0)
-    
+    translate(-4.5, 0)
+
     line(N, W, color=blue)
     dashline(S, E)
     dashline(E, N)
@@ -77,21 +77,15 @@ def slide():
     grestore()
 
     gsave()
-    translate(-0.5, 0)
+    translate(0, 0)
     L = 0.4
     out = [p + L * q for p, q in zip(Dirs, Dirs)]
-    inner = [p - L * q for  p, q in zip(Dirs, Dirs)]
-    line(inner[1], inner[2], color=blue)
-    dashline(inner[3], inner[0])
+    inner = Dirs
+    line(inner[0], inner[3], color=blue)
+    dashline(inner[1], inner[2])
     dashline(inner[0], inner[1])
     dashline(inner[2], inner[3])
     fork_all(out, 0.3)
-
-    for p, q in zip(inner[1:3], Dirs[1:3]):
-        dashline(p, q)
-
-    for p, q in zip(inner[3:] + inner[:1], Dirs[3:] + Dirs[:1]):
-        line(p, q, color=blue)
 
     for p, q in zip(out[1:3], Dirs[1:3]):
         line(p, q, blue)
@@ -99,33 +93,26 @@ def slide():
     for p, q in zip(out[3:] + out[:1], Dirs[3:] + Dirs[:1]):
         dashline(p, q)
 
-    dots(out + inner + Dirs, 0.07)
+    dots(out + Dirs, 0.07)
     grestore()
     gsave()
     translate(4.5, 0)
     inner = Dirs
     dashline(inner[1], inner[2])
-    line(inner[3], inner[0],blue)
+    line(inner[3], inner[0], blue)
     dashline(inner[0], inner[1])
     dashline(inner[2], inner[3])
-    fork_all(out, 0.3)
-
-    for p, q in zip(out[1:3], Dirs[1:3]):
-        line(p, q, blue)
-
-    for p, q in zip(out[3:] + out[:1], Dirs[3:] + Dirs[:1]):
-        dashline(p, q)
-
-    dots(out + inner, 0.07)
+    fork_all(inner, 0.3)
+    dots(inner, 0.07)
     grestore()
 
     setarrowdims(0.04, 0.2)
     newpath()
-    arrow((-3.5, 0), (-2.5, 0))
+    arrow((-3, 0), (-2, 0))
     stroke()
 
     newpath()
-    arrow((1.5, 0), (2.5, 0))
+    arrow((2, 0), (3, 0))
     stroke()
     finish()
 

@@ -61,13 +61,18 @@ def fork_all(pts, L):
         fork(p, n, L)
 
 def delete():
-    init("delete.eps", 640, 200)
+    init("delete.eps", 600, 200)
     center()
     scale(50)
     #scalelinewidth(1.5)
+    L = 0.4
+    out = [p + L * q for p, q in zip(Dirs, Dirs)]
+    inner = [p - L * q for  p, q in zip(Dirs, Dirs)]
+
     gsave()
-    translate(-5, 0)
-    
+    translate(-4.5, 1)
+    scale(0.6)
+
     line(N, W, color=blue)
     line(S, E, color=blue)
     dashline(E, N)
@@ -77,26 +82,34 @@ def delete():
     grestore()
 
     gsave()
-    translate(-0.5, 0)
-    L = 0.4
-    out = [p + L * q for p, q in zip(Dirs, Dirs)]
-    inner = [p - L * q for  p, q in zip(Dirs, Dirs)]
-    line(inner[1], inner[2], color=blue)
-    line(inner[3], inner[0], color=blue)
+    translate(0.1, 0)
+    inner = Dirs
+    dashline(inner[1], inner[2])
+    dashline(inner[3], inner[0])
     dashline(inner[0], inner[1])
     dashline(inner[2], inner[3])
     fork_all(out, 0.3)
 
-    for p, q in zip(inner, Dirs):
-        dashline(p, q)
-
     for p, q in zip(out, Dirs):
         line(p, q, blue)
 
-    dots(out + inner + Dirs, 0.07)
+    dots(out + inner, 0.07)
     grestore()
+
     gsave()
-    translate(4.5, 0)
+    translate(-4.5, -1)
+    scale(0.6)
+
+    line(E, N, color=blue)
+    line(S, W, color=blue)
+    dashline(W, N)
+    dashline(S, E)
+    fork_all([E, N, W, S], 0.3)
+    dots([N,E,S,W], 0.07)
+    grestore()
+
+    gsave()
+    translate(0.1, 0)
     inner = Dirs
     dashline(inner[1], inner[2])
     dashline(inner[3], inner[0])
@@ -112,13 +125,26 @@ def delete():
 
     setarrowdims(0.04, 0.2)
     newpath()
-    arrow((-3.5, 0), (-2.5, 0))
+    arrow((-3, 0), (-2, 0))
     stroke()
 
     newpath()
-    arrow((1.5, 0), (2.5, 0))
+    arrow((2, 0), (3, 0))
     stroke()
+
+    gsave()
+    translate(4.5, 0)
+    dashline(inner[1], inner[2])
+    dashline(inner[3], inner[0])
+    dashline(inner[0], inner[1])
+    dashline(inner[2], inner[3])
+    fork_all(Dirs, 0.3)
+
+    for p, q in zip(inner, Dirs):
+        dashline(p, q)
+
+    dots(inner + Dirs, 0.07)
+    grestore()
+
     finish()
-
-
 delete()
