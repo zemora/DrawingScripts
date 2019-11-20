@@ -106,8 +106,8 @@ object {
            box {
                <-c1, -c2, -0.0001>, <c1, c2, 0.0001>
                texture {
-                   pigment{ color col transmit 0.2 }
-                   finish {diffuse .5 ambient .1 reflection 0.2 phong 1}
+                   pigment{ color col transmit 0.5 }
+                   finish {diffuse .5 ambient .1 reflection 0 phong 1}
                        }               
                }
      no_shadow
