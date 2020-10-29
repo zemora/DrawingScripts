@@ -4,7 +4,7 @@ from piscript.PiModule import *
 
 init(400, 400)
 center()
-scale(60)
+scale(80)
 
 
 setlinewidth(0.3)
