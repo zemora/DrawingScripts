@@ -212,8 +212,8 @@ light_source {
 #local slideT = setTime(0.25, 0.45);
 #local removeT = setTime(0.55, 0.8);
 
-#local pathT = isTime(0.4, 0.6);
-#local moveT = isTime(0.6, 1);
+#local pathT = isTime(0.45, 0.55);
+#local moveT = isTime(0.55, 1);
 #if(pathT)
   //-----------------
   path(array[9]{
@@ -308,11 +308,6 @@ light_source {
     <0, 3, 2>
   }, removeT*20*(-x))
 #end
-
-
-
-
-
 
 #for(row, 0, dimension_size(cubes, 1) - 1)
   #local arr = cubes[row];
