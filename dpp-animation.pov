@@ -213,7 +213,7 @@ light_source {
 #local removeT = setTime(0.55, 0.8);
 
 #local pathT = isTime(0.45, 0.55);
-#local moveT = isTime(0.55, 1);
+#local moveT = isTime(0.55, 1.2);
 #if(pathT)
   //-----------------
   path(array[9]{
@@ -228,7 +228,8 @@ light_source {
     <0, 0, 7>
   })
   //-----------------
-  path(array[9]{
+  path(array[10]{
+    <5, 1, 0>
     <4, 1, 0>,
     <4, 1, 2>,
     <3, 1, 2>,
@@ -266,14 +267,16 @@ light_source {
     <1, 0, 7>
   })
   //-----------------
-  path(array[7]{
+  path(array[9]{
+    <5, 1, 0>
     <4, 1, 0>,
     <4, 1, 2>,
     <3, 1, 2>,
     <3, 1, 4>,
     <2, 1, 4>,
     <2, 1, 5>,
-    <1, 1, 5>
+    <1, 1, 5>,
+    <1, 1, 6>
   })
   //-----------------
   path(array[3]{
@@ -292,8 +295,7 @@ light_source {
     <0, 0, 7>
   }, removeT*20*(-x))
   
-  path2(array[3]{
-    <1, 1, 5>,
+  path2(array[2]{
     <1, 1, 6>,
     <0, 1, 6>
   }, removeT*20*(-x))
