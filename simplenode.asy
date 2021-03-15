@@ -1,4 +1,3 @@
-// `\color{comment}结点类型，第二个实现`
 struct node {
     path outline;
     picture stuff;
@@ -17,23 +16,19 @@ struct node {
     }
 }
 
-// `\color{comment}画出结点数组`
 void draw(picture pic=currentpicture, node[] nodearr)
 {
     for (node nd: nodearr)
         add(pic, shift(nd.pos) * nd.stuff);
 }
 
-// `\color{comment}画出一个或多个结点`
 void draw(picture pic=currentpicture ... node[] nodearr)
 {
     draw(pic, nodearr);
 }
 
-// `\color{comment}边框绘制函数类型`
 typedef void draw_t(picture pic, path g);
 
-// `\color{comment}多个边框绘制函数的复合`
 draw_t compose(... draw_t[] drawfns)
 {
     return new void(picture pic, path g) {
@@ -42,9 +37,8 @@ draw_t compose(... draw_t[] drawfns)
     };
 }
 
-// `\color{comment}空函数，不做边框的绘制`
 draw_t none = new void(picture pic, path g){};
-// `\color{comment}画边框线`
+
 draw_t drawer(pen p)
 {
     return new void(picture pic, path g) {
@@ -52,7 +46,7 @@ draw_t drawer(pen p)
     };
 }
 draw_t drawer=drawer(currentpen);
-// `\color{comment}填充边框`
+
 draw_t filler(pen p)
 {
     return new void(picture pic, path g) {
@@ -60,7 +54,7 @@ draw_t filler(pen p)
     };
 }
 draw_t filler=filler(currentpen);
-// `\color{comment}对边框填充并画线`
+
 draw_t filldrawer(pen fillpen, pen drawpen=currentpen)
 {
     return new void(picture pic, path g) {
@@ -68,14 +62,12 @@ draw_t filldrawer(pen fillpen, pen drawpen=currentpen)
     };
 }
 
-// `\color{comment}画双线边框，第二个实现`
 draw_t doubledrawer(pen p, pen bg=white)
 {
     return compose(drawer(p+linewidth(p)*3), drawer(bg+linewidth(p)));
 }
 draw_t doubledrawer = doubledrawer(currentpen);
 
-// `\color{comment}画阴影`
 draw_t shadow(pair shift=2SE, real scale=1, pen color=gray)
 {
     return new void(picture pic, path g) {
@@ -84,7 +76,6 @@ draw_t shadow(pair shift=2SE, real scale=1, pen color=gray)
 }
 draw_t shadow=shadow();
 
-// `\color{comment}圆形结点的构造函数，第三个实现`
 node Circle(Label text, pair pos, pen textpen=currentpen,
             draw_t drawfn, real maxrad=0.4cm)
 {
@@ -101,7 +92,6 @@ node Circle(Label text, pair pos, pen textpen=currentpen,
     return nd;
 }
 
-// `\color{comment}直线连接结点`
 path operator--(node nd1, node nd2)
 {
     path g1 = shift(nd1.pos) * nd1.outline;
@@ -114,12 +104,10 @@ path operator--(node nd1, node nd2)
     return edge;
 }
 
-// `\color{comment}结点连线函数类型`
 typedef path edgeconnector(node nd1, node nd2);
-// `\color{comment}由单结点生成边的函数类型`
+
 typedef path edgemaker(node nd);
 
-// `\color{comment}nd1 .. con .. nd2 的前一半`
 edgemaker operator..(node nd, edgeconnector con)
 {
     return new path(node nd2) {
@@ -127,7 +115,6 @@ edgemaker operator..(node nd, edgeconnector con)
     };
 }
 
-// `\color{comment}nd1 .. con .. nd2 的后一半`
 path operator..(edgemaker maker, node nd)
 {
     return maker(nd);
@@ -138,7 +125,6 @@ path operator..(node nd, edgemaker maker)
     return maker(nd);
 }
 
-// `\color{comment}以 ang 角弯曲连曲线`
 edgeconnector bend(real ang)
 {
     return new path (node nd1, node nd2) {
@@ -152,11 +138,9 @@ edgeconnector bend(real ang)
     };
 }
 
-// `\color{comment}左弯与右弯`
 edgeconnector bendleft = bend(30);
 edgeconnector bendright = bend(-30);
 
-// `\color{comment}自动机循环`
 edgemaker loop(pair direction, real ratio=1.5)
 {
     return new path(node nd) {
@@ -169,16 +153,13 @@ edgemaker loop(pair direction, real ratio=1.5)
     };
 }
 
-// `\color{comment}对路径作任意变换的函数类型`
 typedef path fpath(path);
 
-// `\color{comment}用函数 t 作用于路径 p`
 path operator@(path p, fpath t)
 {
     return t(p);
 }
 
-// `\color{comment}缩短路径。默认为末端缩短 2bp`
 fpath shorten(real pre=0, real post=2)
 {
     return new path(path p) {
@@ -186,4 +167,3 @@ fpath shorten(real pre=0, real post=2)
     };
 }
 fpath shorten=shorten(2,2);
-

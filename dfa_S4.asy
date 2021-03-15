@@ -20,17 +20,17 @@ draw_t Accepting = compose(shadow, filler(nodepen),
 draw_t Starting = compose(shadow, filler(red),
                            drawer(darkgreen+1.8), drawer(white+0.6));
 
-node q0 = Circle("$q_0$", (0,0), text, Starting),
+node q0 = Circle("$q_0$", (0, 0), text, Starting),
      q1 = Circle("$q_1$", q0.pos + u*S, text, Accepting),
      q3 = Circle("$q_3$", q1.pos + u*E, text, Accepting),
      q2 = Circle("$q_2$", q0.pos + u*E, text, Accepting),
      q4 = Circle("$q_4$", q2.pos + u*E + 0.5u*S, text, Accepting),
      q5 = Circle("$q_5$", q4.pos + u*E, text, Accepting),
      q6 = Circle("$q_6$", q5.pos + u*E, text, Accepting);
+
 node start = Circle("$\mathrm{Start}$", q0.pos + 0.7u*W, starttext, Initial);
 draw(start, q0, q1, q2, q3, q4, q5, q6);
 draw(start -- q0 @ shorten(-2, 2), Arrow);
-
 
 currentpen = temp + red*0.8;
 draw(Label("$s_0$", RightSide), q0 -- q1 @ shorten, Arrow);
