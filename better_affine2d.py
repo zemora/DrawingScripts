@@ -118,52 +118,48 @@ def hyperbolic2d():
     ht = .8
 
     sc = 1.5
-    t = texinsert(r"$C$")
+    TEX = r"\mathcal{{D}}"
+    t = texinsert(r"${}$".format(TEX))
     t.scale(sc)
     t.translate(0, t.height/2)
     place(t, ht/2, ht)
 
-    t = texinsert(r"$tC$")
+    #t = texinsert(r"$tC$")
+    t = texinsert(r"$t{}$".format(TEX))
     t.scale(sc)
     t.translate(0, t.height/2)
     place(t, ht*(1.5), ht)
 
-    t = texinsert(r"$tsC$")
+    #t = texinsert(r"$tsC$")
+    t = texinsert(r"$ts{}$".format(TEX))
     t.scale(sc)
     t.translate(0, t.height/2)
     place(t, ht*(2.5), ht)
 
-    t = texinsert(r"$sC$")
+    #t = texinsert(r"$sC$")
+    t = texinsert(r"$s{}$".format(TEX))
     t.scale(sc)
     t.translate(-t.width, t.height/2)
     place(t, -ht/2, ht)
 
-    t = texinsert(r"$stC$")
+    #t = texinsert(r"$stC$")
+    t = texinsert(r"$st{}$".format(TEX))
     t.scale(sc)
     t.translate(-t.width, t.height/2)
     place(t, -ht*1.5, ht)
 
-    t = texinsert(r"$stsC$")
+    #t = texinsert(r"$stsC$")
+    t = texinsert(r"$sts{}$".format(TEX))
     t.scale(sc)
     t.translate(-t.width, t.height/2)
     place(t, -ht*2.5, ht)
 
-    col = (0, 0, 1)
-    scalelinewidth(2)
+    col = (0, 0, 0)
     newpath()
     moveto(-4*ht, ht)
-    lineto(0, ht)
-    stroke(*col)
-
-    newpath()
-    moveto(ht, ht)
     lineto(4*ht, ht)
     stroke(*col)
 
-    newpath()
-    moveto(0, ht)
-    lineto(ht, ht)
-    stroke(0.5)
 
     dx = 0.03
     for k in range(-8, 8):
