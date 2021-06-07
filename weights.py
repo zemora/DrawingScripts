@@ -74,7 +74,7 @@ def make_sl3_roots(rad=0.12, col=(0, 0.5, 1)):
         fill(*col)
         stroke()
 
-def ref(start, dir, draw=True, col=(1, 0, 0.5), rad=0.12):
+def ref(start, dir, draw=True, col=(1, 0, 0.5), rad=0.12, mul=1):
     S = start
     D = dir
     d = S.real * D.real + S.imag * D.imag
@@ -83,25 +83,40 @@ def ref(start, dir, draw=True, col=(1, 0, 0.5), rad=0.12):
     E = S - k * D
     if not draw:
         return E
+
     newpath()
     moveto(S.real, S.imag)
     lineto(E.real, E.imag)
     stroke(*col)
     for i in range(k+1):
-        newpath()
         Q = S - i * D
+
+        if mul > 2:
+            newpath()
+            circle(Q.real, Q.imag, rad*2.4)
+            fill(1)
+            stroke()
+        if mul > 1:
+            newpath()
+            circle(Q.real, Q.imag, rad*1.8)
+            fill(1)
+            stroke()
+
+        newpath()
         circle(Q.real, Q.imag, rad*1.2)
         fill(*col)
         stroke()
+
+
     return E
 
-def make_polygon(P):
-    P1 = ref(P, a1)
-    P2 = ref(P, a2)
-    P3 = ref(P1, w1+w2)
-    P4 = ref(P3, a2)
-    P5 = ref(P2, w1+w2)
-    P6 = ref(P5, a1)
+def make_polygon(P, mul=1):
+    P1 = ref(P, a1, mul=mul)
+    P2 = ref(P, a2, mul=mul)
+    P3 = ref(P1, w1+w2, mul=mul)
+    P4 = ref(P3, a2, mul=mul)
+    P5 = ref(P2, w1+w2, mul=mul)
+    P6 = ref(P5, a1, mul=mul)
 
 def draw_large_circle(col=(0, 0.5, 1)):
     rad = abs(P + a1 + a2)
@@ -218,9 +233,6 @@ if __name__ == "__main__":
     make_verma_cone()
     make_grid()
     draw_large_circle()
-    make_polygon(P)
-    make_polygon(P - a1 - a2)
-    make_polygon(P - 2*a1 - 2*a2)
     make_fundamental_weights()
     make_sl3_roots()
     make_singular_vector()
@@ -228,4 +240,7 @@ if __name__ == "__main__":
     make_highest_label()
     make_rho_label()
     make_simple_roots_label()
+    make_polygon(P)
+    make_polygon(P - a1 - a2, mul=2)
+    make_polygon(P - 2*a1 - 2*a2, mul=3)
     flush()
