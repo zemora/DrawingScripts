@@ -4,8 +4,8 @@ import numpy as np
 init(400, 400, "weights.eps")
 setfont("CMR10", 10)
 center()
-scale(30)
-translate(-1, 0)
+scale(25)
+translate(-0.3, 0.3)
 
 # basis of dual space
 e1 = 1 + 0j
@@ -133,10 +133,14 @@ def make_highest_label():
 
 
 def make_singular_vector(rad=0.12):
-    P1 = ref(P, a1, False)
-    P2 = ref(P, a2, False)
-    Y = P1 - a1
-    Z = P2 - a2
+    P1 = ref(P + rho, a1, False) - rho
+    P2 = ref(P + rho, a2, False) - rho
+    P3 = ref(P1 + rho, w1+w2, False) - rho
+    P4 = ref(P3 + rho, a2, False) - rho
+    P5 = ref(P4 + rho, a1, False) - rho
+
+    Y = P1
+    Z = P2
     newpath()
     circle(Y.real, Y.imag, rad*1.2)
     fill(0, 1, .5)
@@ -146,6 +150,12 @@ def make_singular_vector(rad=0.12):
     circle(Z.real, Z.imag, rad*1.2)
     fill(0, 1, .5)
     stroke()
+
+    for G in [P3, P4, P5]:
+        newpath()
+        circle(G.real, G.imag, rad*1.2)
+        fill(0, 1, .5)
+        stroke()
 
     sc = 1.4
     t = texinsert(r"$f_{\alpha_1}^{\lambda(\alpha_1^\vee)+1}v^+$")
