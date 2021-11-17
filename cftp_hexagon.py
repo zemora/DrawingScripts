@@ -1,3 +1,6 @@
+"""
+This script draws illustrating figures for the CFTP algorithm.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.path import Path
@@ -21,7 +24,7 @@ def plotline(ax, z1, z2, *args, **kwargs):
 
 def draw_bounding_hexagon(ax, vertices):
     """
-    Draw the bounding hexagon on a `ax` instance and return the path patch.
+    Draw the bounding hexagon on a matplotlib `ax` instance and return the path patch.
     """
     coords = [(z.real, z.imag) for z in vertices]
     xlist, ylist = zip(*coords)
@@ -39,6 +42,7 @@ def draw_background_triangle_lattice(ax, ULR, n):
     U, L, R = ULR
     lines = []
     for i in range(-n, n):
+        # three families of grid lines
         for P, Q in [[U, L], [U, R], [L, U]]:
             v1 = i * P + n * Q
             v2 = i * P - n * Q
@@ -49,11 +53,13 @@ def draw_background_triangle_lattice(ax, ULR, n):
 
 
 def draw_paths_on_hexagon(ax, size, ULR, paths):
+    """
+    Draw a set of nonintersecting paths on a matplotlib `ax` instance
+    """
     a, b, c = size
     U, L, R = ULR
     for i, path in enumerate(paths[1:-1]):
-        start = b * L + (i + 0.5) * U
-        v1 = start
+        v1 = b * L + (i + 0.5) * U
         for ht1, ht2 in zip(path[:-1], path[1:]):
             if ht1 < ht2:
                 v2 = v1 - L
@@ -66,7 +72,7 @@ def draw_paths_on_hexagon(ax, size, ULR, paths):
 def draw_hexagon_on_triangle_lattice(size, paths=None):
     """
     Draw hexagon on the triangle lattice.
-    :param a, b, c: side lengths of the hexagon.
+    :param size: side lengths of the hexagon, a tuple of three integers.
     :param paths: a set of nonintersecting paths.
     """
     U = dir(90)
