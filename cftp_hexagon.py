@@ -24,7 +24,8 @@ def plotline(ax, z1, z2, *args, **kwargs):
 
 def draw_bounding_hexagon(ax, vertices):
     """
-    Draw the bounding hexagon on a matplotlib `ax` instance and return the path patch.
+    Draw the bounding hexagon (in black) on a matplotlib `ax` instance and
+    return the path patch.
     """
     coords = [(z.real, z.imag) for z in vertices]
     xlist, ylist = zip(*coords)
@@ -37,7 +38,7 @@ def draw_bounding_hexagon(ax, vertices):
 
 def draw_background_triangle_lattice(ax, ULR, n):
     """
-    Draw the background triangle lattice in a hexagon.
+    Draw the background triangle lattice in a hexagon (dashed gray lines).
     """
     U, L, R = ULR
     lines = []
@@ -54,7 +55,7 @@ def draw_background_triangle_lattice(ax, ULR, n):
 
 def draw_paths_on_hexagon(ax, size, ULR, paths):
     """
-    Draw a set of nonintersecting paths on a matplotlib `ax` instance
+    Draw a set of nonintersecting paths on a matplotlib `ax` instance (bold red).
     """
     a, b, c = size
     U, L, R = ULR
@@ -71,7 +72,7 @@ def draw_paths_on_hexagon(ax, size, ULR, paths):
 
 def draw_hexagon_on_triangle_lattice(size, paths=None):
     """
-    Draw hexagon on the triangle lattice.
+    Set up the figure and combine all the stuff.
     :param size: side lengths of the hexagon, a tuple of three integers.
     :param paths: a set of nonintersecting paths.
     """
@@ -100,6 +101,7 @@ def draw_hexagon_on_triangle_lattice(size, paths=None):
     if paths:
         draw_paths_on_hexagon(ax, size, (U, L, R), paths)
 
+    # add text annotations
     size = 18
     z = A + C / 2
     ax.text(z.real + 0.2, z.imag + 0.2, "$a$", fontsize=size)
